@@ -3,12 +3,12 @@ Notable Variables
 
 These are variables I am identifying as interesting based on my intuition:
 
-Account age: requester_account_age_in_days_at_request
-Account activity: requester_number_of_posts_at_request, requester_number_of_comments_at_request, requester_upvotes_plus_downvotes_at_request 
-Account karma: requester_upvotes_minus_downvotes_at_request
-Account flair: requester_user_flair
-Net upvote score of post: number_of_upvotes_of_request_at_retrieval, number_of_downvotes_of_request_at_retrieval
-Received pizza?: requester_received_pizza 
+* Account age: requester_account_age_in_days_at_request
+* Account activity: requester_number_of_posts_at_request, requester_number_of_comments_at_request, requester_upvotes_plus_downvotes_at_request 
+* Account karma: requester_upvotes_minus_downvotes_at_request
+* Account flair: requester_user_flair
+* Net upvote score of post: number_of_upvotes_of_request_at_retrieval, number_of_downvotes_of_request_at_retrieval
+* Received pizza?: requester_received_pizza 
 
 ---
 
