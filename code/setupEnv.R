@@ -1,9 +1,10 @@
 # R Script to properly setup R Environment
 
-setupWindows <- function()
+setupEnv <- function()
 {
     # Set up working directory
-    setwd("~/Github/Kaggle-RandomActsOfPizza");
+    setwd("~/Github/Kaggle-RandomActsOfPizza"); # Windows
+    # Mac directory goes here eventually
     
     # Grab data and make available as global variables
     library(jsonlite); # Data files are JSON

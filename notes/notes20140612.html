@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>Notes Jun-12, 2014</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<h1>Notes Jun-12, 2014</h1>
+
+<p>Had a few new thoughts since yesterday:</p>
+
+<ul>
+<li>Post titles often have tags pre-appended to them, like [OFFER], [REQUEST], [THANKS] and [META]. Posts that have the [OFFER], [META], or [THANKS] tag should be set to not fulfilled. I&#39;ll have to verify this but it makes sense that the only posts getting fulfilled must have an [OFFER] tag or no tag at all.</li>
+<li>If the post was edited, more likely then not they are probably saying &ldquo;Thanks!&rdquo; in the edit.</li>
+</ul>
+
+<p>So for now I&#39;m just going to play with the data and see what cool things I can find out.</p>
+
+<h2>Checking Edits</h2>
+
+<p>Going to check the edited part first. I started by making a simple table of edited vs. fulfilled, but got a lot of strange values for whether the post was edited. I wonder what that&#39;s about? I&#39;ll probably need to find a way to clean it up. For now, I&#39;ll just categorize those funny data points as &ldquo;funny&rdquo;.</p>
+
+<pre><code class="R">editTable &lt;- table(dTrain$post_was_edited, dTrain$requester_received_pizza)
+editTable &lt;- as.data.frame.matrix(editTable)
+editTable &lt;- editTable[3:nrow(editTable),] # Isolate messy data
+
+# For some reason a table returns strange results, so will do this manually
+editTableFalse &lt;- editTable[,1]
+editTableTrue &lt;- editTable[,2]
+</code></pre>
+
+<p>The results for the funny edit data to fulfillment were&hellip;</p>
+
+<table><thead>
+<tr>
+<th>FALSE</th>
+<th>TRUE</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>203</td>
+<td>96</td>
+</tr>
+</tbody></table>
+
+<p>Bummer! I was hoping it&#39;d be more unanimous one way. Anyway, let&#39;s report on the statistic that I care about for now&hellip;</p>
+
+<pre><code class="R">editTable &lt;- table(dTrain$post_was_edited, dTrain$requester_received_pizza)
+editTable &lt;- as.data.frame.matrix(editTable)
+editTable &lt;- editTable[1:2,]
+editTable[3,] &lt;- c(203, 96)
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Edited</th>
+<th>FALSE</th>
+<th>TRUE</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No Edit</td>
+<td>2646 (65.5%)</td>
+<td>749 (18.5%)</td>
+</tr>
+<tr>
+<td>Edit</td>
+<td>197 (4.9%)</td>
+<td>149 (3.7%)</td>
+</tr>
+<tr>
+<td>Funny</td>
+<td>203 (5.0%)</td>
+<td>96 (2.4%)</td>
+</tr>
+</tbody></table>
+
+<p>So it looks like that bit of intuition was wrong. Posts that are edited are not more likely to have been fulfilled than posts that were not.</p>
+
+</body>
+
+</html>
+
