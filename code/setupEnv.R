@@ -13,6 +13,10 @@ setupEnv <- function()
     
     # Do some basic mods to the data
     dTrain$PostKarma <- dTrain$number_of_upvotes_of_request_at_retrieval - dTrain$number_of_downvotes_of_request_at_retrieval; # Add karma score
+    dTrain$PostLength <- nchar(dTrain$request_text)
+    dTrain$PostLengthEditAware <- nchar(dTrain$request_text_edit_aware)
+    
+    dTest$PostLengthEditAware <- nchar(dTest$request_text_edit_aware)
     
     # Make data available as global variables
     dTest <<- dTest;

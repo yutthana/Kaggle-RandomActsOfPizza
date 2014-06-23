@@ -9,6 +9,7 @@ These are variables I am identifying as interesting based on my intuition:
 * Account flair: requester_user_flair
 * Net upvote score of post: number_of_upvotes_of_request_at_retrieval, number_of_downvotes_of_request_at_retrieval
 * Received pizza?: requester_received_pizza 
+* Request Text: request_text_edit_aware, request_text
 
 ---
 
